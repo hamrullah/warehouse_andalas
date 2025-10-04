@@ -1,0 +1,18 @@
+{% load crispy_forms_tags %}
+
+<div class="card">
+  <div class="card-body">
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {{ form|crispy }}
+      <div class="d-flex gap-2 mt-3">
+        <button class="btn btn-primary" type="submit">
+          <i class="bi bi-check2-circle me-1"></i> Simpan
+        </button>
+        <a class="btn btn-outline-secondary" href="javascript:history.back()">
+          <i class="bi bi-arrow-left me-1"></i> Kembali
+        </a>
+      </div>
+    </form>
+  </div>
+</div>

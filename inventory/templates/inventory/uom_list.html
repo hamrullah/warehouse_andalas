@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Satuan — Single Warehouse{% endblock %}
+{% block page_title %}Satuan (UoM){% endblock %}
+{% block page_subtitle %}Kelola satuan produk.{% endblock %}
+{% block header_actions %}
+  <a href="{% url 'inventory:uom-create' %}" class="btn btn-primary">
+    <i class="bi bi-plus-circle me-1"></i> Tambah Satuan
+  </a>
+{% endblock %}
+{% block content %}
+<div class="card">
+  <div class="card-body p-0">
+    {% if object_list %}
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="table-light">
+          <tr>
+            <th style="width:70px;">#</th>
+            <th>Nama Satuan</th>
+            <th style="width:160px;" class="text-end">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for obj in object_list %}
+          <tr>
+            <td class="text-secondary">{{ forloop.counter }}</td>
+            <td class="fw-semibold"><span class="chip chip-blue">{{ obj.name }}</span></td>
+            <td class="text-end">
+              <div class="btn-group">
+                <a class="btn btn-sm btn-outline-primary" href="{% url 'inventory:uom-update' obj.id %}">
+                  <i class="bi bi-pencil-square"></i>
+                </a>
+                <a class="btn btn-sm btn-outline-danger" href="{% url 'inventory:uom-delete' obj.id %}">
+                  <i class="bi bi-trash"></i>
+                </a>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+      <div class="empty-state">
+        <div class="icon mb-3"><i class="bi bi-rulers"></i></div>
+        <h2 class="h5">Belum ada satuan</h2>
+        <p class="mb-3">Tambahkan satuan untuk digunakan oleh produk.</p>
+        <a href="{% url 'inventory:uom-create' %}" class="btn btn-primary">
+          <i class="bi bi-plus-circle me-1"></i> Tambah Satuan
+        </a>
+      </div>
+    {% endif %}
+  </div>
+  {% include "_pagination.html" %}
+</div>
+{% endblock %}

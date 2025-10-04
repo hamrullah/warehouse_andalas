@@ -1,0 +1,6 @@
+Django==5.2.*
+psycopg[binary]
+python-dotenv
+django-unfold
+django-crispy-forms
+crispy-bootstrap5

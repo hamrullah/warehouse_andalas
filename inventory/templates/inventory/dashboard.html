@@ -1,0 +1,11 @@
+<!doctype html><html><body>
+<h1>Dashboard</h1>
+<p>Selamat datang, {{ request.user.get_username }}.</p>
+<nav>
+  <a href="{% url 'inventory:product-list' %}">Produk</a> |
+  <a href="{% url 'inventory:category-list' %}">Kategori</a> |
+  <a href="{% url 'inventory:uom-list' %}">Satuan</a> |
+  <a href="{% url 'inventory:transaction-list' %}">Transaksi</a> |
+  <a href="{% url 'logout' %}">Logout</a>
+</nav>
+</body></html>

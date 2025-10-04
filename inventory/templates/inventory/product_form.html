@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Produk — Form{% endblock %}
+{% block page_title %}Form Produk{% endblock %}
+{% block page_subtitle %}Lengkapi data produk.{% endblock %}
+{% block content %}{% include "inventory/_form.html" %}{% endblock %}
+<!doctype html><html><body>
+<h2>Produk</h2>
+<form method='post'>{% csrf_token %}{{ form.as_p }}<button type='submit'>Simpan</button></form>
+</body></html>

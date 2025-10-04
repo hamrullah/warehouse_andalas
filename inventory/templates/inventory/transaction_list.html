@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Transaksi — Single Warehouse{% endblock %}
+{% block page_title %}Transaksi Stok{% endblock %}
+{% block page_subtitle %}Semua perubahan stok (Masuk/Keluar) satu gudang.{% endblock %}
+{% block header_actions %}
+  <a href="{% url 'inventory:transaction-create' %}" class="btn btn-primary">
+    <i class="bi bi-plus-circle me-1"></i> Transaksi Baru
+  </a>
+{% endblock %}
+{% block content %}
+<div class="card">
+  <div class="card-body p-0">
+    {% if object_list %}
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="table-light">
+          <tr>
+            <th style="width:60px;">#</th>
+            <th>Tanggal</th>
+            <th>Produk</th>
+            <th>Tipe</th>
+            <th class="text-end">Qty</th>
+            <th>Catatan</th>
+            <th style="width:160px;" class="text-end">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for obj in object_list %}
+          <tr>
+            <td class="text-secondary">{{ forloop.counter }}</td>
+            <td>{{ obj.trx_date|date:"d M Y H:i" }}</td>
+            <td>{{ obj.product }}</td>
+            <td>
+              {% if obj.trx_type == "IN" %}
+                <span class="chip chip-green"><i class="bi bi-arrow-down-left me-1"></i>Masuk</span>
+              {% else %}
+                <span class="chip chip-red"><i class="bi bi-arrow-up-right me-1"></i>Keluar</span>
+              {% endif %}
+            </td>
+            <td class="text-end">{{ obj.quantity }}</td>
+            <td>{{ obj.note|default:"-" }}</td>
+            <td class="text-end">
+              <div class="btn-group">
+                <a class="btn btn-sm btn-outline-primary" href="{% url 'inventory:transaction-update' obj.id %}">
+                  <i class="bi bi-pencil-square"></i>
+                </a>
+                <a class="btn btn-sm btn-outline-danger" href="{% url 'inventory:transaction-delete' obj.id %}">
+                  <i class="bi bi-trash"></i>
+                </a>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+      <div class="empty-state">
+        <div class="icon mb-3"><i class="bi bi-arrow-left-right"></i></div>
+        <h2 class="h5">Belum ada transaksi</h2>
+        <p class="mb-3">Catat transaksi masuk/keluar untuk mengubah stok.</p>
+        <a href="{% url 'inventory:transaction-create' %}" class="btn btn-primary">
+          <i class="bi bi-plus-circle me-1"></i> Transaksi Baru
+        </a>
+      </div>
+    {% endif %}
+  </div>
+  {% include "_pagination.html" %}
+</div>
+{% endblock %}
