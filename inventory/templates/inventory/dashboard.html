@@ -1,11 +1,65 @@
-<!doctype html><html><body>
-<h1>Dashboard</h1>
-<p>Selamat datang, {{ request.user.get_username }}.</p>
-<nav>
-  <a href="{% url 'inventory:product-list' %}">Produk</a> |
-  <a href="{% url 'inventory:category-list' %}">Kategori</a> |
-  <a href="{% url 'inventory:uom-list' %}">Satuan</a> |
-  <a href="{% url 'inventory:transaction-list' %}">Transaksi</a> |
-  <a href="{% url 'logout' %}">Logout</a>
-</nav>
-</body></html>
+{% extends "base.html" %}
+{% block title %}Selamat Datang — Warehouse{% endblock %}
+{% block page_title %}Selamat Datang{% endblock %}
+{% block page_subtitle %}Sistem Manajemen Stok Warehouse Anda{% endblock %}
+
+{% block header_actions %}
+  <a href="{% url 'inventory:product-list' %}" class="btn btn-primary">
+    <i class="bi bi-box-seam me-1"></i> Lihat Produk
+  </a>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-6 col-lg-3 mb-3">
+    <div class="card text-center shadow-sm">
+      <div class="card-body">
+        <i class="bi bi-box-seam display-5 text-primary mb-2"></i>
+        <h5 class="card-title">Produk</h5>
+        <p class="card-text">Kelola master data produk</p>
+        <a href="{% url 'inventory:product-list' %}" class="btn btn-sm btn-outline-primary">Kelola</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-3 mb-3">
+    <div class="card text-center shadow-sm">
+      <div class="card-body">
+        <i class="bi bi-tags display-5 text-success mb-2"></i>
+        <h5 class="card-title">Kategori</h5>
+        <p class="card-text">Atur kategori produk</p>
+        <a href="{% url 'inventory:category-list' %}" class="btn btn-sm btn-outline-success">Kelola</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-3 mb-3">
+    <div class="card text-center shadow-sm">
+      <div class="card-body">
+        <i class="bi bi-upc-scan display-5 text-warning mb-2"></i>
+        <h5 class="card-title">Satuan (UoM)</h5>
+        <p class="card-text">Definisi unit satuan</p>
+        <a href="{% url 'inventory:uom-list' %}" class="btn btn-sm btn-outline-warning">Kelola</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-3 mb-3">
+    <div class="card text-center shadow-sm">
+      <div class="card-body">
+        <i class="bi bi-arrow-left-right display-5 text-danger mb-2"></i>
+        <h5 class="card-title">Transaksi</h5>
+        <p class="card-text">Catat keluar/masuk stok</p>
+        <a href="{% url 'inventory:transaction-list' %}" class="btn btn-sm btn-outline-danger">Kelola</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card mt-4">
+  <div class="card-body text-center py-5">
+    <h3 class="mb-3">Selamat datang di sistem Warehouse</h3>
+    <p class="text-muted mb-4">Gunakan menu di atas untuk mulai mengelola produk, kategori, satuan, dan transaksi stok.</p>
+    <a href="{% url 'inventory:product-create' %}" class="btn btn-lg btn-primary">
+      <i class="bi bi-plus-circle me-1"></i> Tambah Produk Pertama
+    </a>
+  </div>
+</div>
+{% endblock %}
